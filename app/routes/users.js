@@ -12,3 +12,29 @@ module.exports = app => {
 
 
 //role 
+
+
+
+// let customPromise= new Promise((resolve,reject)=>{
+//     // resolve(123)
+//     reject(123)
+// })
+
+// async function test(){
+//     try{
+//         let answer = await customPromise // answer is 123
+//     }catch(e){
+//         // e is 123
+//     }
+// }
+
+// function test(){
+//     // customPromise.then(answer=>{
+//     //     //answer is 123
+//     // })
+
+//     customPromise.catch(error=>{
+//         //error is 123
+//     })
+// }
+

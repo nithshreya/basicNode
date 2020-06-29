@@ -1,7 +1,9 @@
 const express = require('express');
 const dotenv = require('dotenv')
+var cors = require('cors')
 dotenv.config()
 const app = express();
+app.use(cors())
 const dbPromise = require('./app/service/database')
 
 let id = 0;
@@ -15,7 +17,8 @@ app.use(require('./app/middlewares/tokenVerification'))
 
 require('./app/routes/users')(app)
 
-app.listen(3000, () => console.log('Listening to port 3000'));
+
+app.listen(process.env.PORT, () => console.log(`Listening to port ${process.env.PORT}`));
 
 
 
