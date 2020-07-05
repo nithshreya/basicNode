@@ -44,8 +44,28 @@ const deleteUser = (req, res) => {
 const getUser = (req, res) => {
     dbPromise.then(db => {
         const collection = db.collection('users')
-        collection.findOne({ _id: ObjectID(req.params.id) }).then(user => {
+        collection.findOne({ _id: ObjectID(req.params.id)}).then(user => {
             res.send(user)
+        }).catch(e => res.send(e))
+    })
+}
+
+const editUser = (req,res) => {
+    dbPromise.then(db => {
+        const collection = db.collection('users')
+        console.log(req.body)
+        if(req.body.username){
+            console.log("Username cant be changed")
+            delete req.body.username
+        }
+        if(req.body.password){
+            console.log("Password cant be changed")
+            delete req.body.password
+        }
+        collection.updateOne({_id: ObjectID(req.params.id)}, { $set: req.body }).then(user => {
+            console.log(req.body)
+            // res.send(user)
+            getUser(req,res)
         }).catch(e => res.send(e))
     })
 }
@@ -84,5 +104,5 @@ const login = (req, res) => {
 
 
 module.exports = {
-    getUserList, addUser, deleteUser, getUser, login
+    getUserList, addUser, deleteUser, getUser, login, editUser
 }

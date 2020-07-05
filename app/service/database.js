@@ -4,8 +4,10 @@ const MongoClient = require('mongodb').MongoClient;
 
 module.exports = new Promise((resolve, reject) => {
     MongoClient.connect(url, function (err, client) {
-        if (err)
+        if (err){
+            console.log({err})
             reject(err)
+        }
         console.log("successfully connected to mongodb");
         const db = client.db(dbName);
         // console.log({db})
