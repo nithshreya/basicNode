@@ -18,7 +18,6 @@ const getUserList = (req, res) => {
 }
 
 const addUser = (req, res) => {
-    console.log('vhjhbjbjjhg')
     const { name, age, sex, pin, role, username, password } = req.body
     const newEntry = { name, age, sex, pin, role, username, password }
     dbPromise.then(db => {
