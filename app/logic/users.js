@@ -87,7 +87,7 @@ const login = (req, res) => {
             if (!user) {
                 res.status(400).send({ error: 'Please enter the correct user and password' })
             }
-            jwt.sign(user , process.env.JWT_SECRET, { expiresIn: '1h' }, (err, token) => {
+            jwt.sign(user , process.env.JWT_SECRET, { expiresIn: '10d' }, (err, token) => {
                 if (err) {
                     console.log(err)
                     res.status(400).send({
@@ -99,8 +99,6 @@ const login = (req, res) => {
         })
     })
 }
-
-
 
 module.exports = {
     getUserList, addUser, deleteUser, getUser, login, editUser
