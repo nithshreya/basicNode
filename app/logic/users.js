@@ -65,7 +65,7 @@ const editUser = async (req, res) => {
       fs.readFile(`${req.body.profilePic}`, function (err, data) {
         // Display the file content
         console.log({ err, data });
-        const base64data = Buffer.from(data, "binary").toString("base64");
+        const base64data = Buffer.from(data).toString("base64");
         console.log({ base64data });
         resolve(base64data);
       });
