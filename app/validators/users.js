@@ -28,6 +28,7 @@ function changedUser(req, res, next) {
     sex: Joi.string(),
     pin: Joi.number().integer(),
     role: Joi.string().min(3).max(15),
+    profilePic:Joi.string().min(3)
   };
   let result = Joi.validate(body, schema);
   if (result.error) {

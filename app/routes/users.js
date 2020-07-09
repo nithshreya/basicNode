@@ -1,3 +1,6 @@
+const express = require("express");
+var userRouter = express.Router()
+
 const {
   getUserList,
   addUser,
@@ -9,11 +12,13 @@ const {
 const { validateAddUser, changedUser } = require("../validators/users.js");
 const {authenticateRole,authenticateEdit} = require("../middlewares/authentication");
 
-module.exports = (app) => {
-  app.get("/users", authenticateRole(["user", "admin"]), getUserList); // user //admin
-  app.post("/users", authenticateRole(["admin"]), validateAddUser, addUser); //admin
-  app.delete("/users/:id", authenticateRole(["admin"]), deleteUser); //admin
-  app.get("/users/:id", authenticateRole(["user", "admin"]), getUser); //user admin
-  app.post("/users/login", login);
-  app.patch("/users/:id",authenticateEdit(["admin"]), changedUser, editUser);
+
+module.exports = (homeRouter) => {
+  homeRouter.use('/users', userRouter);
+  userRouter.get("/", authenticateRole(["user", "admin"]), getUserList); // user //admin
+  userRouter.post("/", authenticateRole(["admin"]), validateAddUser, addUser); //admin
+  userRouter.delete("/:id", authenticateRole(["admin"]), deleteUser); //admin
+  userRouter.get("/:id", authenticateRole(["user", "admin"]), getUser); //user admin
+  userRouter.post("/login", login);
+  userRouter.patch("/:id",authenticateEdit(["admin"]), changedUser, editUser);
 };
