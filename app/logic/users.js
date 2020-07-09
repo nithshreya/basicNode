@@ -76,11 +76,17 @@ const editUser = async (req, res) => {
     delete req.body.profilePic;
     req.body.image = image;
   }
-  await collection.updateOne(
-    { _id: ObjectID(req.params.id) },
-    { $set: req.body }
-  );
-  return getUser(req, res);
+  if (req.body) {
+    await collection.updateOne(
+      { _id: ObjectID(req.params.id) },
+      { $set: req.body }
+    );
+    return getUser(req, res);
+  } else {
+    res
+      .json({ error: "Please provide valid parameters to update" })
+      .status(422);
+  }
 };
 
 const login = (req, res) => {
