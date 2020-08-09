@@ -25,7 +25,6 @@ const addUser = (req, res) => {
     collection
       .insertOne(newEntry)
       .then((result) => {
-        console.log({ result });
         res.status(201).send("");
       })
       .catch((e) => console.error({ e }));
@@ -90,6 +89,7 @@ const editUser = async (req, res) => {
 };
 
 const login = (req, res) => {
+  console.log(".................");
   dbPromise.then((db) => {
     const collection = db.collection("users");
     const login_username = req.body.username;
@@ -108,14 +108,15 @@ const login = (req, res) => {
         }
       )
       .then((user) => {
-        console.log(user);
         if (!user) {
           res
             .status(400)
             .send({ error: "Please enter the correct user and password" });
+          // console.log(user); 
         }
+        console.log({role: user.role});
         jwt.sign(
-          user,
+          {role: user.role},
           process.env.JWT_SECRET,
           { expiresIn: "10d" },
           (err, token) => {

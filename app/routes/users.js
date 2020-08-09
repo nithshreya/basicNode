@@ -14,6 +14,7 @@ const {authenticateRole,authenticateEdit} = require("../middlewares/authenticati
 
 
 module.exports = (homeRouter) => {
+  console.log({homeRouter})
   homeRouter.use('/users', userRouter);
   userRouter.get("/", authenticateRole(["user", "admin"]), getUserList); // user //admin
   userRouter.post("/", authenticateRole(["admin"]), validateAddUser, addUser); //admin

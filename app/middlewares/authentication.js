@@ -8,6 +8,7 @@ function authenticateRole(roles) {
     console.log(req.requesterDetails);
     let role = req.requesterDetails.role;
     if (roles.includes(role)) {
+      console.log('ok')
       next();
     } else {
       res

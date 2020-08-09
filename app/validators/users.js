@@ -1,6 +1,7 @@
 const Joi = require("joi");
 
 function validateAddUser(req, res, next) {
+  console.log('validating')
   const body = req.body;
   const schema = {
     name: Joi.string().min(3).max(30).required(),
@@ -14,7 +15,9 @@ function validateAddUser(req, res, next) {
   let result = Joi.validate(body, schema);
   if (result.error) {
     res.status(400).send(result.error);
+    console.log(result.error)
   } else {
+    console.log('validated')
     next();
   }
   // console.log(result)
